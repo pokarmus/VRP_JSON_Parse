@@ -42,14 +42,14 @@ def write_all_data_to_csv_g(file, file_path, is_group):
                             group = add_data[counter-1]["groupId"]
                             if group == "None":
                                 group = ""
-                            csv_line = [str(counter), j["id"], (j["coordinates"])["lng"], (j["coordinates"])["lat"],
+                            csv_line = [str(counter), str(j["id"]).replace(",", ""), (j["coordinates"])["lng"], (j["coordinates"])["lat"],
                                         add_data[counter-1]["distanceFromPreviousPoint"], group]
                             writer.writerow(csv_line)
                             writer_sc.writerow(csv_line)
                             counter += 1
                     else:
                         for j in locations:
-                            csv_line = [str(counter), j["id"], (j["coordinates"])["lng"], (j["coordinates"])["lat"],
+                            csv_line = [str(counter), str(j["id"]).replace(",", ""), (j["coordinates"])["lng"], (j["coordinates"])["lat"],
                                         add_data[counter - 1]["distanceFromPreviousPoint"]]
                             writer.writerow(csv_line)
                             writer_sc.writerow(csv_line)

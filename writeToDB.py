@@ -17,7 +17,7 @@ def create_records_g(file, file_path, is_group):
         counter = 1
         for j in locations:
             order = str(counter)
-            location_id = j["id"]
+            location_id = str(j["id"]).replace(",", "")
             longitude = (j["coordinates"])["lng"]
             latitude = (j["coordinates"])["lat"]
             service_duration = add_data[counter - 1]["serviceDuration"]
