@@ -25,7 +25,7 @@ if __name__ == '__main__':
     if json_type == "VRP 1.0":
         if import_type.lower().__contains__("csv"):
             file = open(file_path, 'r', encoding='utf8')
-            write_all_data_to_csv_g(file, file_path, False)
+            write_all_data_to_csv(file, file_path, False)
             file.close()
         if import_type.lower().__contains__("db"):
             file = open(file_path, 'r', encoding='utf8')
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         if json_type == "VRP 1.0G":
             if import_type.lower().__contains__("csv"):
                 file = open(file_path, 'r', encoding='utf8')
-                write_all_data_to_csv_g(file, file_path, True)
+                write_all_data_to_csv(file, file_path, True)
                 file.close()
             if import_type.lower().__contains__("db"):
                 file = open(file_path, 'r', encoding='utf8')

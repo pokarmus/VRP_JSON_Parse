@@ -3,7 +3,7 @@ from importJSON import *
 from mySQLconnector import write_multiple_data, get_database_details
 
 
-def create_records_g(file, file_path, is_group):
+def create_records(file, file_path, is_group):
     data = read_json(file)
     lista = read_routes_from_json(data)
     output = []
@@ -39,20 +39,18 @@ def create_records_g(file, file_path, is_group):
     return output
 
 
-def get_sql_query():
-    return "INSERT INTO " + str(get_database_details()[0]) + "." + str(get_database_details()[1]) + \
-           " (file_name, route, order_in_route, location_id, longitude, latitude, serviceDuration, " \
-          "demand, distanceFromPreviousPoint, roadDurationFromPreviousPoint) " \
-          "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-
-
-def get_sql_query_g():
-    return "INSERT INTO " + str(get_database_details()[0]) + "." + str(get_database_details()[1]) + \
-           " (file_name, route, order_in_route, location_id, longitude, latitude, serviceDuration, " \
-          "demand, distanceFromPreviousPoint, roadDurationFromPreviousPoint, groupId) " \
-          "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+def get_sql_query(is_group=False):
+    if not is_group:
+        return "INSERT INTO " + str(get_database_details()[0]) + "." + str(get_database_details()[1]) + \
+            " (file_name, route, order_in_route, location_id, longitude, latitude, serviceDuration, " \
+            "demand, distanceFromPreviousPoint, roadDurationFromPreviousPoint) " \
+            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    else:
+        return "INSERT INTO " + str(get_database_details()[0]) + "." + str(get_database_details()[1]) + \
+               " (file_name, route, order_in_route, location_id, longitude, latitude, serviceDuration, " \
+               "demand, distanceFromPreviousPoint, roadDurationFromPreviousPoint, groupId) " \
+               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
 
 def write_data_to_db_g(file, file_path, is_group):
-    write_multiple_data(get_sql_query_g(), create_records_g(file, file_path, True)) if is_group else \
-        write_multiple_data(get_sql_query(), create_records_g(file, file_path, False))
+    write_multiple_data(get_sql_query(is_group), create_records(file, file_path, is_group))

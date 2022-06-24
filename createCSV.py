@@ -4,7 +4,7 @@ import csv
 import os
 
 
-def write_all_data_to_csv_g(file, file_path, is_group):
+def write_all_data_to_csv(file, file_path, is_group):
     data = read_json(file)
     lista = read_routes_from_json(data)
     dump_coord = read_dump_coord(data)
